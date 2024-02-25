@@ -8,9 +8,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="" element="">
-          Not Found
-        </Route>
+     
+        
       </Routes>
     </>
   );
