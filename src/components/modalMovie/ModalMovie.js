@@ -3,49 +3,59 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import { useState } from "react";
+import {useToast} from  "@chakra-ui/react";
 
 function ModalMovie(props) {
-    console.table(props);
   const [comment, setcomment] = useState("");
+  const toast=useToast();
   const handleChang = (event) => {
     setcomment(event.target.value);
   };
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     console.log("Comment:", comment);
     const postData = {
-        "title": props.movie.title,
-        "overview": props.movie.overview,
-        "release_date": props.movie.release_date,
-        "poster_path": props.movie.poster_path,
-        "comments": comment
+      title: props.movie.title,
+      overview: props.movie.overview,
+      release_date: props.movie.release_date,
+      poster_path: props.movie.poster_path,
+      comments: comment,
     };
-
-    fetch('http://localhost:3002/addMovie', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData)
+  
+    fetch("https://movies-be-server.onrender.com/addMovie", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-         
-            console.log('Response:', data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Response:", data);
+      })
+      .then(() => {
+        toast({
+          title: "Success",
+          description: "Movie added successfully.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
         });
-
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        throw error;
+      });
+  
     props.onHide();
-};
+  };
   return (
     <>
-      <Modal
+      <Modal 
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -84,5 +94,5 @@ function ModalMovie(props) {
       </Modal>
     </>
   );
-}
+  }
 export default ModalMovie;

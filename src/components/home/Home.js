@@ -8,8 +8,8 @@ function Home() {
   const [movirArr, setMovieArr] = useState([]);
 
   const sendReq = async () => {
-    const serverUrl = "http://localhost:3002/trending";
-    //const res = await fetch(serverUrl);
+    const serverUrl = "https://movies-be-server.onrender.com/trending";
+   
     await axios
       .get(serverUrl)
       .then((res) => {
@@ -19,9 +19,7 @@ function Home() {
         console.log(error);
       });
   };
-  // const resJson = await res.json();
-  // console.log(resJson);
-  // setMovieArr(resJson);
+  
 
   useEffect(() => {
     sendReq();
@@ -29,8 +27,7 @@ function Home() {
   return (
     <>
       <NavBar />
-
-      <MovieList movies={movirArr} />
+      <MovieList movies={movirArr}  />
     </>
   );
 }

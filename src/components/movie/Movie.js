@@ -7,6 +7,7 @@ import ModalMovie from "../modalMovie/ModalMovie";
 function Movie(props) {
   const [modalShow, setModalShow] = useState(false);
   const handleOnClick = () => {
+    
     setModalShow(true);
   };
   const [showMore, setShowMore] = useState(true);
@@ -38,14 +39,14 @@ function Movie(props) {
             <Button variant="success" onClick={handleOnClick}>
               Add to the favorite list
             </Button>
-            <ModalMovie
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-              movie={props.movieData}
-            />
           </Card.Body>
         </Card>
       </Col>
+      <ModalMovie
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        movie={props.movieData}
+      />
     </>
   );
 }
