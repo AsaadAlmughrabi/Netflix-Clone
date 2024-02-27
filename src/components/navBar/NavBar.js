@@ -10,7 +10,7 @@ function NavBar() {
       style={{ height: "80px", marginBottom: "10px" }}
     >
       <Container>
-        <Navbar.Brand
+        <Navbar.Brand   
           style={{
             fontWeight: "700",
             color: "red",
