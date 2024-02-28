@@ -27,7 +27,10 @@ function Home() {
   return (
     <>
       <NavBar />
-      <MovieList movies={movirArr}  />
+      <div className="card">
+      
+        <MovieList movies={movirArr}  />
+        </div>
     </>
   );
 }
